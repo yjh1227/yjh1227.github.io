@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[大数据集群管理脚本]]></title>
+    <url>%2F2019%2F02%2F03%2F%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%2F</url>
+    <content type="text"><![CDATA[大数据集群管理脚本此脚本包括hadoop的hdfs，yarn启动，zookeeper，hive的启动在/usr/local/bin目录下创建一个可执行脚本start-cluster.sh,代码如下：1234567891011121314#!/bin/bashecho &quot;================= 开始启动所有节点服务 ================&quot;echo &quot;================= 正在启动Zookeeper ================&quot;for i in yjh@hadoop102 yjh@hadoop103 yjh@hadoop104do ssh $i &apos;/opt/module/zookeeper-3.4.10/bin/zkServer.sh&apos;doneecho &quot;================= 正在启动HDFS ================&quot;ssh yjh@hadoop102 &apos;/opt/module/hadoop-2.7.2/sbin/start-dfs.sh&apos;echo &quot;================= 正在启动YARN ================&quot;ssh yjh@hadoop103 &apos;/opt/module/hadoop-2.7.2/sbin/start-yarn.sh&apos;echo &quot;================= hadoop102节点正在启动JobHistoryServer ================&quot;ssh yjh@hadoop102 &apos;/opt/module/hadoop-2.7.2/mr-jobhistory-daemon.sh start historyserver&apos;]]></content>
+      <categories>
+        <category>BigData</category>
+      </categories>
+      <tags>
+        <tag>shell脚本</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[xsync脚本]]></title>
     <url>%2F2019%2F02%2F02%2Fxsync%E8%84%9A%E6%9C%AC%2F</url>
     <content type="text"><![CDATA[xsync脚本: 实现对集群进行文件复制在/usr/local/bin下创建脚本文件文件属性设置： chmod a+x xsync123456789101112131415161718192021222324252627#!/bin/bash#1 获取输入参数个数，如果没有参数，直接退出pcount=$#if(( pcount==0 )); then echo no args; exit;fi#2获取文件名称 p1=$1;fname=`basename $p1`;#echo fname=$fname;#3 获取上级目录的绝对路径pdir=`cd -P $(dirname $p1) ; pwd`#echo pdir=$pdir ;#4 获取当前用户user=`whoami`#5 循环for((host=103;host&lt;105;host++)) ; do echo ------------------ hadoop$host ---------------------- #echo $pdir/$fname $user@hadoop$host:$pdir rsync -rvl $pdir/$fname $user@hadoop$host:$pdirdone]]></content>
@@ -34,8 +45,8 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Hello World]]></title>
+    <title><![CDATA[Hello World，拥抱开源]]></title>
     <url>%2F2019%2F01%2F30%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[不用再找别的地方写博客啦，慢慢在这积累吧。]]></content>
+    <content type="text"><![CDATA[个人站点四年时间剩下不多了，搭建此博客的目的是拥抱开源，剩下的一年时间写写技术总结，总之有空就更吧。欢迎star。 双流区？]]></content>
   </entry>
 </search>
